@@ -1,12 +1,12 @@
-Description: Downloads the latest version of the Logi Options+ installer app, and creates a package. This package
+Description: Downloads the latest version of the Logi Options+ offline installer app, and creates a package. This package
   deploys the installer to /tmp in then installs the app silently.
 Identifier: com.github.wegotoeleven-recipes.pkg.LogiOptionsPlus
 MinimumVersion: '2.3'
 ParentRecipe: com.github.wegotoeleven-recipes.download.LogiOptionsPlus
 
 Input:
-  NAME: Logi OptionsPlus
-  URL: https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.zip
+  NAME: Logi OptionsPlus Offline
+  URL: https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer_offline.zip
 
 Process:
   - Processor: PkgRootCreator
@@ -22,11 +22,11 @@ Process:
     Arguments:
       overwrite: false
       source: "%found_filename%"
-      target: "%RECIPE_CACHE_DIR%/pkg/root/private/tmp/logioptionsplus.app"
+      target: "%RECIPE_CACHE_DIR%/pkg/root/private/tmp/logioptionsplus_installer_offline.app"
 
   - Processor: com.github.dataJAR-recipes.Shared Processors/QuarantineRemover
     Arguments:
-      quarantined_files_path: "%RECIPE_CACHE_DIR%/pkg/root/private/tmp/logioptionsplus.app"
+      quarantined_files_path: "%RECIPE_CACHE_DIR%/pkg/root/private/tmp/logioptionsplus_installer_offline.app"
 
 
   - Processor: FileCreator
@@ -37,13 +37,13 @@ Process:
         #!/bin/zsh
 
         # Check exit code and bail if the package didn't install correctly
-        if [[ -e "/private/tmp/logioptionsplus.app" ]]; then
-            if ! "/private/tmp/logioptionsplus.app/Contents/MacOS/logioptionsplus_installer" --quiet; then
+        if [[ -e "/private/tmp/logioptionsplus_installer_offline.app" ]]; then
+            if ! "/private/tmp/logioptionsplus_installer_offline.app/Contents/MacOS/logioptionsplus_installer" --quiet; then
                 echo "Issues occurred during the installation of Logi Options+. Please check the install log and try again."
                 exit 1
             fi
         else
-            echo "Unable to find Logi Options+ installer. Bailing..."
+            echo "Unable to find Logi Options+ Offline installer. Bailing..."
             exit 1
         fi
 

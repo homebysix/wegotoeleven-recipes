@@ -1,10 +1,10 @@
-Description: Unzip the latest version of the Logi Options+ installer app
+Description: Unzip the latest version of the Logi Options+ offline installer app
 Identifier: com.github.wegotoeleven-recipes.download.LogiOptionsPlus
 MinimumVersion: '2.3'
 
 Input:
-  NAME: Logi OptionsPlus
-  URL: https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.zip
+  NAME: Logi OptionsPlus Offline
+  URL: https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer_offline.zip
 
 Process:
   - Processor: URLDownloader
